@@ -1,0 +1,199 @@
+mybatis-plus:
+  # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
+  # 如果是放在resource目录 classpath:/mapper/*Mapper.xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.jia.pay.dao.entity
+#  type-enums-package: com.jia.pay.dao.entity.enums
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    #驼峰下划线转换
+    db-column-underline: true
+    #mp2.3+ 全局表前缀 mp_
+    #table-prefix: mp_
+    #刷新mapper 调试神器
+    #refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+    # Sequence序列接口实现类配置
+#    key-generator: com.baomidou.mybatisplus.incrementer.OracleKeyGenerator
+    #逻辑删除配置（下面3个配置）
+    logic-delete-value: 1
+    logic-not-delete-value: 0
+    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+    #自定义填充策略接口实现
+#    meta-object-handler: com.baomidou.springboot.MyMetaObjectHandler
+  configuration:
+    #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId）
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    #配置JdbcTypeForNull, oracle数据库必须配置
+    jdbc-type-for-null: 'null'
+spring:
+  profiles:
+    active: local
+  datasource:
+    # 可自动识别
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    # DataSource配置
+    druid:
+      # 初始容量
+      initial-size: 10
+      # 最大连接池个数
+      max-active: 20
+      # 最小空闲
+      min-idle: 10
+      # 获取连接最大等待时间
+      max-wait: 3000
+      # 是否缓存preparedStatement(PSCache),对游标提升巨大,建议oracle开启,mysql关闭
+      pool-prepared-statements: false
+      # 启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+      max-pool-prepared-statement-per-connection-size: 0
+      # 检测连接是否有效的sql，要求是一个查询语句，常用select 'x'。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会起作用。
+      validation-query: select 'x'
+      # 检测连接是否有效的超时时间。秒,底层调用jdbc Statement对象的void setQueryTimeout(int seconds)方法
+      validation-query-timeout: 30
+      # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      test-on-borrow: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      test-on-return: false
+      # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      test-while-idle: true
+      # 驱逐策略间隔,如果连接空闲时间大于minEvictableIdleTimeMillis,则关闭
+      time-between-eviction-runs-millis: 60000
+      # 在池中的最小生存时间
+      min-evictable-idle-time-millis: 30000
+      # 在池中的最大生存时间
+      max-evictable-idle-time-millis: 600000
+      # 连接池中的minIdle数量以内的连接，空闲时间超过minEvictableIdleTimeMillis，则会执行keepAlive操作。
+      keep-alive: true
+      # 连接初始化时,执行的sql
+      connection-init-sqls:
+      # 开启的过滤器,常用的有  监控统计:stat  日志:log4j 防御sql注入:wall
+#      filters: stat,wall,log4j
+      # 合并多个dataSource的监控记录
+      use-global-data-source-stat: true
+
+      # 监控配置
+      # 是否启用stat-filter默认值true
+      web-stat-filter.enabled: true
+      # 匹配的uri
+      web-stat-filter.url-pattern: /*
+      # 忽略的uri *.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*
+      web-stat-filter.exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+      # 是否启用session统计
+      web-stat-filter.session-stat-enable: true
+      web-stat-filter.session-stat-max-count: 1000
+      web-stat-filter.principal-session-name: zx
+      web-stat-filter.principal-cookie-name: zx
+      # 监控单个url调用的sql列表。
+      web-stat-filter.profile-enable: true
+      # StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
+      #是否启用监控界面默认值true
+      stat-view-servlet.enabled: true
+      # web.xml的url-pattern,也就是访问/druid/*访问到该servlet
+      stat-view-servlet.url-pattern: /druid/*
+      #  允许清空统计数据
+      stat-view-servlet.reset-enable: true
+      # 用户名
+      stat-view-servlet.login-username: zx
+      # 密码
+      stat-view-servlet.login-password: 123456
+      # ip白名单
+      stat-view-servlet.allow:
+      # ip黑名单
+      stat-view-servlet.deny:
+      # 过滤器配置
+      filter:
+        stat:
+          # 聚合sql 开启慢sql查询
+          merge-sql: true
+          # 是否开启慢sql查询
+          log-slow-sql: true
+          # 超过多少时间为慢sql 开启慢sql查询
+          slow-sql-millis: 500
+          # 是否启用
+          enabled: true
+  #缓存
+  cache:
+    # 默认过期时间
+    expireTime: 86400
+    #缓存名字
+    cache-names: #该属性的接收类型为list,得在这样写才可以分为一个个元素
+      - common # 随时可清理的通用缓存
+    #缓存过期时间
+    cacheExpires:  #自定义属性,也是list,用来配置缓存过期时间,值为0时根据我的逻辑是使用默认超时时间的
+      - 86400
+    #缓存类型,同时引入guava包和redis时,不配置可能有bug
+    type: redis
+  #redis配置
+  redis:
+    database: 0
+    host: 121.40.176.35
+    port: 6379
+    password: xiangcheng
+    pool:
+     max-active: 256
+     max-wait: 5000
+     max-idle: 100
+     min-idle: 10
+  # 彩色日志
+  output:
+    ansi:
+      enabled: always
+  thymeleaf:
+    cache: true
+    check-template-location: false
+    content-type: text/html
+    check-template: false
+    enabled: true
+    encoding: UTF-8
+#    mode: LEGACYHTML5
+    suffix: .html
+    prefix: classpath:/templates/
+    mode: HTML
+
+pay:
+# 通用
+  common:
+#   地址前缀
+    domain: http://tkg8n7.natappfree.cc
+# 富有
+  fuyou:
+#    h5支付异步通知地址
+    h5AsyncNotifyUrl: ${pay.common.domain}/fuyou/wap/pay/async
+#    h5同步接口-自定义参数
+    h5SyncUrl: ${pay.common.domain}/fuyou/wap/pay/sync
+#    PC网银支付 同步通知地址
+    pcSyncNotifyUrl: ${pay.common.domain}/fuyou/pc/bank/sync
+#    PC网银支付 异步通知地址
+    pcAsyncNotifyUrl: ${pay.common.domain}/fuyou/pc/bank/async
+#    pc快捷支付 前台通知地址
+    pcQuickPayPageUrl: ${pay.common.domain}/fuyou/pc/quick/sync
+#    pc快捷支付 后台异步通知地址
+    pcQuickPayAsyncUrl: ${pay.common.domain}/fuyou/pc/quick/async
+
+# 连连
+  lianlian:
+#   wap快捷支付 同步通知地址
+    wapQuickPaySyncNotifyUrl: ${pay.common.domain}/lianlian/wap/pay/sync
+#    wap快捷支付 异步通知地址
+    wapQuickPayAsyncNotifyUrl: ${pay.common.domain}/lianlian/wap/pay/async
+#    web快捷支付 同步通知地址
+    webQuickPaySyncNotifyUrl: ${pay.common.domain}/lianlian/pc/pay/sync
+#    web快捷支付 异步通知地址
+    webQuickPayAsyncNotifyUrl: ${pay.common.domain}/lianlian/pc/pay/async
+#    代付异步通知地址
+    replacePayAsyncNotifyUrl: ${pay.common.domain}/lianlian/replacePay/async
+
+#   自定义
+custom:
+#  ip白名单
+  blank-ips:
+    - 127.0.0.1
+    - localhost
+    - 192.168.139.1

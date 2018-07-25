@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>pay-service</artifactId>
+	<version>${jia-pay.version}</version>
+	<packaging>jar</packaging>
+
+	<name>pay-service</name>
+	<description>业务层</description>
+
+	<parent>
+		<groupId>com.jia.pay</groupId>
+		<artifactId>pay-parent</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.jia.pay</groupId>
+			<artifactId>pay-dao</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jia.pay</groupId>
+			<artifactId>pay-common</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jia.pay</groupId>
+			<artifactId>pay-api</artifactId>
+		</dependency>
+
+
+	</dependencies>
+
+
+
+
+</project>

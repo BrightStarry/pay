@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jia.pay.dao.mapper.BankQuotaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jia.pay.dao.entity.BankQuota">
+        <id column="id" property="id" />
+        <result column="payer_code" property="payerCode" />
+        <result column="bank_code" property="bankCode" />
+        <result column="pay_type" property="payType" />
+        <result column="name" property="name" />
+        <result column="single_quota" property="singleQuota" />
+        <result column="day_quota" property="dayQuota" />
+        <result column="month_quota" property="monthQuota" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, payer_code, bank_code, pay_type, name, single_quota, day_quota, month_quota, delete_flag, update_time, create_time
+    </sql>
+
+</mapper>

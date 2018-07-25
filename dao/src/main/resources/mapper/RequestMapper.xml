@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jia.pay.dao.test.mapper.RequestMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jia.pay.dao.entity.Request">
+        <id column="id" property="id" />
+        <result column="request_id" property="requestId" />
+        <result column="payer_request_id" property="payerRequestId" />
+        <result column="caller_id" property="callerId" />
+        <result column="relate_id" property="relateId" />
+        <result column="payer_code" property="payerCode" />
+        <result column="pay_type" property="payType" />
+        <result column="request_body" property="requestBody" />
+        <result column="status" property="status" />
+        <result column="sync_response" property="syncResponse" />
+        <result column="async_response" property="asyncResponse" />
+        <result column="response_message" property="responseMessage" />
+        <result column="request_time" property="requestTime" />
+        <result column="sync_response_time" property="syncResponseTime" />
+        <result column="async_response_time" property="asyncResponseTime" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, request_id, payer_request_id, caller_id, relate_id, payer_code, pay_type, request_body, status, sync_response, async_response, response_message, request_time, async_response_time, delete_flag, update_time, create_time
+    </sql>
+
+</mapper>
