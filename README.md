@@ -16,10 +16,21 @@
 - web： web模块，以及整个项目启动的相关配置
     - config： 常量/Spring cache配置/自定义配置等
     - system： SpringMVC异常处理相关类
+    
+    
+#### 结构
+- 支持的银行定义在bank表，支持的支付方定义在payer表，各支付方的各接口的支付限额在bank_quota表，各支付方的银行代码定义在payer_bank表
+- caller表定义了可调用该模块接口的调用者。
+- request表记录了所有的接口调用记录，包括请求和响应消息。
+- 项目缓存部分使用Spring Cache redis，并定义了一些自定义参数
+- dao层整合了MyBatis-Plus框架
 
-#### 其他
-- 请求： /system/delete/cache/{cacheName} 或 /delete/cache/{cacheName}/{key} ，  
-可删除整个个cacheName(spring cache中的缓存概念)，或 单个key
+#### 接口
+- 缓存相关：见SystemController  
+请求 /system/delete/cache/{cacheName} 或 /delete/cache/{cacheName}/{key}， 可删除整个个cacheName(spring cache中的缓存概念)，或 单个key
+- 支付： 见PayController 
+- 查询： 见QueryController
+
 
 
 #### 整合MyBatis-Plus
@@ -55,3 +66,6 @@ public class ObjectMapperUtil {
     }
 }
 ```
+
+#### 其他
+- sql文件在resources/sql目录下
